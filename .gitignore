@@ -1,4 +1,8 @@
-*.iml
+
 .idea
-build
 !.idea/runConfigurations/
+!.idea/runConfigurations/**/*
+
+*.iml
+
+build
