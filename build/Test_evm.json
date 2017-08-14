@@ -1,0 +1,223 @@
+{
+	".auxdata" : "a165627a7a7230582086e0535784522145b151a57ac40637ccbda617799a30658d078297e2d89897fb0029",
+	".code" : 
+	[
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "PUSH",
+			"value" : "60"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "PUSH",
+			"value" : "40"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "MSTORE"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "tag",
+			"value" : "1"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "JUMPDEST"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "PUSH",
+			"value" : "0"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "DUP1"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "REVERT"
+		}
+	]
+}{
+	".code" : 
+	[
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "PUSH",
+			"value" : "60"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "PUSH",
+			"value" : "40"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "MSTORE"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "CALLVALUE"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "ISZERO"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "PUSH [tag]",
+			"value" : "1"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "JUMPI"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "PUSH",
+			"value" : "0"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "DUP1"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "REVERT"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "tag",
+			"value" : "1"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "JUMPDEST"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "tag",
+			"value" : "2"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "JUMPDEST"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "PUSH #[$]",
+			"value" : "0000000000000000000000000000000000000000000000000000000000000000"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "DUP1"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "PUSH [$]",
+			"value" : "0000000000000000000000000000000000000000000000000000000000000000"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "PUSH",
+			"value" : "0"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "CODECOPY"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "PUSH",
+			"value" : "0"
+		},
+		{
+			"begin" : 14668,
+			"end" : 14685,
+			"name" : "RETURN"
+		}
+	],
+	".data" : 
+	{
+		"0" : 
+		{
+			".auxdata" : "a165627a7a7230582086e0535784522145b151a57ac40637ccbda617799a30658d078297e2d89897fb0029",
+			".code" : 
+			[
+				{
+					"begin" : 14668,
+					"end" : 14685,
+					"name" : "PUSH",
+					"value" : "60"
+				},
+				{
+					"begin" : 14668,
+					"end" : 14685,
+					"name" : "PUSH",
+					"value" : "40"
+				},
+				{
+					"begin" : 14668,
+					"end" : 14685,
+					"name" : "MSTORE"
+				},
+				{
+					"begin" : 14668,
+					"end" : 14685,
+					"name" : "tag",
+					"value" : "1"
+				},
+				{
+					"begin" : 14668,
+					"end" : 14685,
+					"name" : "JUMPDEST"
+				},
+				{
+					"begin" : 14668,
+					"end" : 14685,
+					"name" : "PUSH",
+					"value" : "0"
+				},
+				{
+					"begin" : 14668,
+					"end" : 14685,
+					"name" : "DUP1"
+				},
+				{
+					"begin" : 14668,
+					"end" : 14685,
+					"name" : "REVERT"
+				}
+			]
+		}
+	}
+}
