@@ -39,7 +39,7 @@ contract Owned {
     }
 }
 
-contract TokenContract is Owned {
+contract Token is Owned {
 
     // Публичные переменные контракта.
 
@@ -80,7 +80,7 @@ contract TokenContract is Owned {
     // Вопрос. Мы этот контракт будем компилировать и деплоить какой-то транзакцией. 
     // Где мы будем указывать параметры для этой функции? Это при компиляции? Это при деплое? 
     // Как конкретно указывать эти значения?
-    function TokenContract(
+    function Token(
         uint256 initialSupply,
         string tokenName,
         uint8 decimalUnits,
@@ -311,22 +311,13 @@ contract TokenContract is Owned {
 
 contract Proxy {
 
-    TokenContract public tokenContract;
+    Token public token;
 
-    string public proxyName;
-
-    function Proxy(
-        TokenContract _tokenContract,
-        string _proxyName
-    ) {
-        tokenContract = _tokenContract;
-        proxyName = _proxyName;
+    function Proxy(Token _token) {
+        token = _token;
     }
 
     function() payable {
-        tokenContract.buyOnBehalfOf.value(msg.value)(msg.sender);
+        token.buyOnBehalfOf.value(msg.value)(msg.sender);
     }
-}
-
-contract Test {
 }
