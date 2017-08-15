@@ -244,6 +244,10 @@ contract Token is Owned {
         }
     }
 
+    function getBalance(address account) returns (uint256 amount) {
+        return balanceOf[account];
+    }
+
     function setPrices(uint256 newSellPrice, uint256 newBuyPrice) onlyOwner {
         sellPrice = newSellPrice;
         buyPrice = newBuyPrice;

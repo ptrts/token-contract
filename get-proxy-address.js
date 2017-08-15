@@ -1,15 +1,17 @@
-var primary = eth.accounts[0];
-
-personal.unlockAccount(primary, "12345", 3600000);
-
 // Достаем свершившуюся транзакцию создания контракта прокси
 var txInfo = eth.getTransactionReceipt(proxyTxHash);
 
-// Вытаскиваем из нее адрес созданного контракта прокси
-var proxyAddress = txInfo.contractAddress;
+if (txInfo) {
 
-if (!proxyAddress) {
-    throw "Контракт прокси еще не создан, повторите попытку позднее";
+    // Вытаскиваем из нее адрес созданного контракта прокси
+    var proxyAddress = txInfo.contractAddress;
+
+    if (proxyAddress) {
+        console.log('var proxyAddress = \'' + proxyAddress + '\';\n');
+    } else {
+        console.log('// Ошибка. Контракт прокси еще не создан, повторите попытку позднее');
+    }
+
+} else {
+    console.log('// Ошибка. Транзакции еще нет, повторите попытку позднее');
 }
-
-console.log("var proxyAddress = '" + proxyAddress + "';\n");
