@@ -81,12 +81,12 @@ contract Token is Owned {
     // Где мы будем указывать параметры для этой функции? Это при компиляции? Это при деплое? 
     // Как конкретно указывать эти значения?
     function Token(
-        uint256 initialSupply,
-        string tokenName,
-        uint8 decimalUnits,
-        string tokenSymbol,
-        uint256 _buyPrice,
-        uint256 _sellPrice
+    uint256 initialSupply,
+    string tokenName,
+    uint8 decimalUnits,
+    string tokenSymbol,
+    uint256 _buyPrice,
+    uint256 _sellPrice
     ) {
         owner = msg.sender;
 
@@ -111,26 +111,22 @@ contract Token is Owned {
     // Перевести свои токены на другой счет
     function transfer(address _to, uint256 _value) {
 
-        uint256 balanceTo = balanceOf[_to];
-        
-        uint256 balanceFrom = balanceOf[msg.sender];
-
         // Если некто пытается перевести на пустой счет, то выбросить исключение
         require(_to > 0x0);
 
         // Проверить, есть ли у отправителя столько токенов
-        require(balanceFrom >= _value);
+        require(balanceOf[msg.sender] >= _value);
 
         // Проверяем не переполнится ли счет-назначение, если мы переведем на него такую сумму
         // Прибавляем к балансу счета-назначения указанную сумму, и если она стала не больше, а меньше, 
         // то это значит, что произошло переполнение
-        require(balanceTo + _value >= balanceTo);
+        require(balanceOf[_to] + _value >= balanceOf[_to]);
 
         // Отнимаем сумму со счета отправителя
-        balanceOf[msg.sender] = balanceFrom - _value;
+        balanceOf[msg.sender] -= _value;
 
         // Прибавляем сумму к счету получателя
-        balanceOf[_to] = balanceTo + _value;
+        balanceOf[_to] += _value;
 
         // Записываем в лог событие, что произошло перечисление денег
         Transfer(msg.sender, _to, _value);
@@ -170,14 +166,11 @@ contract Token is Owned {
         // Проверяем, чтобы не переводили на нулевой счет
         require(_to > 0x0);
 
-        uint256 balanceFrom = balanceOf[_from];
-        uint256 balanceTo = balanceOf[_to];
-        
         // Проверяем, есть ли на счету столько денег
-        require(balanceFrom >= _value);
+        require(balanceOf[_from] >= _value);
 
         // Проверяем, не лопнет ли счет получателя
-        require(balanceTo + _value >= balanceTo);
+        require(balanceOf[_to] + _value >= balanceOf[_to]);
 
         // Проверяем, можно ли инициатору данной функции тратить столько денег
         require(_value <= allowance[_from][msg.sender]);
@@ -269,13 +262,13 @@ contract Token is Owned {
 
     // Некто прислал нам эфиров, чтобы купить на них токены, по текущей цене
     function buyOnBehalfOf(address buyer) payable returns (uint amount) {
-        
+
         require(buyer > 0x0);
-    
+
         // К нам в транзакцию пришло какое-то количество эфиров
         // К этому количеству эфиров мы имеем доступ через такое свойство:
         //      msg.value
-    
+
         // Выясняем, на сколько эфиров хватит того количества эфиров, которое нам прислали
         amount = msg.value / buyPrice;
 
@@ -334,5 +327,115 @@ contract Proxy {
 
     function() payable {
         token.buyOnBehalfOf.value(msg.value)(msg.sender);
+    }
+}
+
+contract Test {
+
+    /////////////////////////////////////////////
+    /////////////////////////////////////////////
+    
+    uint256 public testValue;
+
+    function get() returns (uint256 _value) {
+        return testValue;
+    }
+
+    function set(uint256 _value) {
+        testValue = _value;
+    }
+
+    /////////////////////////////////////////////
+    /////////////////////////////////////////////
+
+    uint256 public transactionsCount;
+
+    function() payable {
+        transactionsCount = transactionsCount + 1;
+    }
+
+    function getCount() returns (uint256 count) {
+        return transactionsCount;
+    }
+    
+    /////////////////////////////////////////////
+    /////////////////////////////////////////////
+
+
+
+
+
+
+
+    // Публичные переменные контракта.
+
+    // Каждый сможет узнать их значения.
+
+    uint256 public sellPrice;
+    uint256 public buyPrice;
+
+    // Версия интерфейса токена
+    string public standard = 'Token 0.1';
+
+    // Название токена
+    string public name;
+
+    // Символ токена
+    string public symbol;
+
+    // Сколько точек после запятой у самой маленькой допустимой дольки этого токена
+    uint8 public decimals;
+
+    // Сколько сейчас этого токена всего
+    uint256 public totalSupply;
+
+    // Функция для получения баланса
+    mapping (address => uint256) public balanceOf;
+
+    // Функция для получения подбалансов для друзей того счета, у которого есть баланс
+    mapping (address => mapping (address => uint256)) public allowance;
+
+    // Событие в логе о том,что произошел перевод средств: кто, кому, сколько
+    event Transfer(address indexed from, address indexed to, uint256 value);
+
+    // Событие о том, что некто потратил какое-то количество токенов
+    event Burn(address indexed from, uint256 value);
+
+    // Функция создания контракта
+    // Указывается не только количество токенов, но и отличительные характеристики токена
+    // Вопрос. Мы этот контракт будем компилировать и деплоить какой-то транзакцией. 
+    // Где мы будем указывать параметры для этой функции? Это при компиляции? Это при деплое? 
+    // Как конкретно указывать эти значения?
+    function Test(
+        uint256 initialSupply,
+        string tokenName,
+        uint8 decimalUnits,
+        string tokenSymbol,
+        uint256 _buyPrice,
+        uint256 _sellPrice
+    ) {
+        transactionsCount = 0;
+        testValue = 0;
+    
+        ///////////////////////////////////////////////////
+    
+        //owner = msg.sender;
+
+        // Переводим изначальное количество токена на создателя
+        balanceOf[this] = initialSupply;
+
+        // Устанавливаем переменную с изначальным запасом
+        totalSupply = initialSupply;
+
+        name = tokenName;
+        symbol = tokenSymbol;
+        decimals = decimalUnits;
+
+        buyPrice = _buyPrice;
+        sellPrice = _sellPrice;
+    }
+
+    function getName() returns (string _name){
+        return name;
     }
 }

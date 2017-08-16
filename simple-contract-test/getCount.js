@@ -2,17 +2,17 @@ var primary = eth.accounts[0];
 
 personal.unlockAccount(primary, "12345", 3600000);
 
-var TokenContract = eth.contract(contractTokenAbi);
+var TestContract = eth.contract(contractTestAbi);
 
-var instance = TokenContract.at(tokenAddress);
+var instance = TestContract.at(testAddress);
 
 if (instance) {
     
-    //var result = instance.getBalance.call(primary);
+    //console.log(JSON.stringify(instance, null, '\t'));
     
     var result = instance.getName.call();
     
-    console.log("result = " + result);
+    console.log("result = " + result)
     
 } else {
     console.error("Ошибка. Почему-то нет контракта");

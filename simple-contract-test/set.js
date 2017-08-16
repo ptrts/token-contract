@@ -2,20 +2,19 @@ var primary = eth.accounts[0];
 
 personal.unlockAccount(primary, "12345", 3600000);
 
-var TokenContract = eth.contract(contractTokenAbi);
+var TestContract = eth.contract(contractTestAbi);
 
-var instance = TokenContract.at(tokenAddress);
+var instance = TestContract.at(testAddress);
 
 if (instance) {
     
     //console.log("// JSON: " + JSON.stringify(instance));
 
-    instance.mintToken.sendTransaction(
-        primary, 
-        10, 
+    instance.set.sendTransaction(
+        42, 
         {
             from: primary,
-            gas: 1e6,
+            gas: 1000000,
             gasPrice: 20e9
         }
     );

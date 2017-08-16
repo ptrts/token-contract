@@ -11,7 +11,7 @@ var contract = ProxyContract.new(
     {
         from: primary,
         data: contractProxyCode,
-        gas: 1000000,
+        gas: 1e10,
         gasPrice: 20e9
     }
 );
